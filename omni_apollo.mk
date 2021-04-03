@@ -14,28 +14,36 @@
 # limitations under the License.
 #
 
-# Release name
-PRODUCT_RELEASE_NAME := apollo
 DEVICE_PATH := device/xiaomi/apollo
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
+# Release name
+PRODUCT_RELEASE_NAME := apollo
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+#Inherit from those products. Most specific first
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
+# Inherit from PitchBlack
+$(call inherit-product, vendor/pb/config/common.mk)
 
 
-## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := apollo
-PRODUCT_NAME := omni_apollo
-PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := M2007J3SG
-PRODUCT_MANUFACTURER := Xiaomi
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2099-12-31
 
+# FastbootD
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    android.hardware.fastboot@1.0-impl-mock.recovery
 
-PRODUCT_PACKAGES += fastbootd
-#PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root)
 
+## Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := apollo
+PRODUCT_NAME := omni_apollo
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := Mi 10T
+PRODUCT_MANUFACTURER := Xiaomi

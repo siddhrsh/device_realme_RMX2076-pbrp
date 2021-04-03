@@ -28,27 +28,17 @@
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-    # vibrator
-    chown system system /sys/bus/i2c/drivers/aw8697_haptic/2-005a/f0_save
-    chown system system /sys/bus/i2c/drivers/aw8697_haptic/2-005a/osc_save
-    chown system system /sys/bus/i2c/drivers/aw8697_haptic/3-005a/osc_save
-
     chmod 0660 /dev/qseecom
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
-    
     install_keyring
 
 on early-fs
     start vold
 
 on init
-    start vendor.qti.vibrator-1-2
-    start hwservicemanager
     setprop crypto.ready 1
-    
 
 # Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
 service sbinqseecomd /sbin/qseecomd
@@ -57,20 +47,7 @@ service sbinqseecomd /sbin/qseecomd
     disabled
     seclabel u:r:recovery:s0
 
-service hwservicemanager /system/bin/hwservicemanager
-    user root
-    group root
-    disabled
-    onrestart setprop hwservicemanager.ready false
-    seclabel u:r:recovery:s0
-
-service servicemanager /system/bin/servicemanager
-    user root
-    group root readproc
-    disabled
-    seclabel u:r:recovery:s0
-
-service keystore_auth /system/bin/keystore_auth
+service keystore_auth /sbin/keystore_auth
     oneshot
     user system
     group root
@@ -78,7 +55,7 @@ service keystore_auth /system/bin/keystore_auth
     seclabel u:r:recovery:s0
 
 # keystore is started and stopped on demand by TWRP
-service keystore /system/bin/keystore /tmp/misc/keystore
+service keystore /sbin/keystore /tmp/misc/keystore
     user root
     group root drmrpc readproc
     disabled
@@ -96,15 +73,6 @@ service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service-qti
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.qti.vibrator-1-2 /vendor/bin/hw/vendor.qti.hardware.vibrator@1.2-service
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
-on boot
-    setprop sys.usb.config adb
-
 on property:crypto.ready=0
     stop sbinqseecomd
     stop keymaster-4-0
@@ -117,4 +85,8 @@ on property:crypto.ready=1
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-0
     start gatekeeper-1-0
+
+on property:sys.usb.config=fastboot
     start servicemanager
+    start hwservicemanager
+    restart fastbootd
