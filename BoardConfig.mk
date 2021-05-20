@@ -86,3 +86,8 @@ TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_FORCE_USE_BUSYBOX := true
+
+# PBRP specific build flags
+PB_DISABLE_DEFAULT_DM_VERITY := true
+PB_DISABLE_DEFAULT_TREBLE_COMP := true
+PB_TORCH_PATH := "/sys/class/flashlight"
