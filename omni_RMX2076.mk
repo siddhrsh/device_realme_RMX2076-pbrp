@@ -16,12 +16,15 @@
 # limitations under the License.
 #
 
+# Release name
+PRODUCT_RELEASE_NAME := RMX2076
+
+# Dynamic
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
-
-# Inherit from RMX2076 device
-$(call inherit-product, device/realme/RMX2076/device.mk)
 
 # Inherit some common PBRP stuff.
 $(call inherit-product, vendor/pb/config/common.mk)
@@ -35,3 +38,12 @@ PRODUCT_NAME := omni_RMX2076
 PRODUCT_BRAND := Realme
 PRODUCT_MODEL := Realme X50 Pro
 PRODUCT_MANUFACTURER := Realme
+
+# HACK: Set vendor patch level and enable Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2099-12-31 \
+    ro.treble.enabled=true
+
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    android.hardware.fastboot@1.0-impl-mock.recovery
