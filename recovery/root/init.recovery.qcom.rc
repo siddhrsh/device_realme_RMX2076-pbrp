@@ -119,7 +119,7 @@ on boot
     # Enable double-tap to wake
     #write /sys/devices/virtual/touch/tp_dev/gesture_on 1
     # Enable OTG
-    #write /sys/class/power_supply/usb/otg_switch 1
+    write /sys/class/power_supply/usb/otg_switch 1
 
 on property:recovery.perf.mode=1
     write /sys/devices/system/cpu/cpu1/online 1
