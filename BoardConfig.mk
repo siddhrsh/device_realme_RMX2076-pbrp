@@ -90,6 +90,8 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_FORCE_USE_BUSYBOX := true
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
+TW_Y_OFFSET := 115
+TW_H_OFFSET := -115
 
 # PBRP specific build flags
 PB_DISABLE_DEFAULT_DM_VERITY := true
