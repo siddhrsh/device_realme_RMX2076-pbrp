@@ -16,5 +16,19 @@
 # limitations under the License.
 #
 
-add_lunch_combo omni_RMX2071CN-userdebug
-add_lunch_combo omni_RMX2071CN-eng
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+
+# Inherit from RMX2076 device
+$(call inherit-product, device/realme/RMX2076/device.mk)
+
+# Inherit some common Omni stuff.
+$(call inherit-product, vendor/omni/config/common.mk)
+
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := RMX2076
+PRODUCT_NAME := omni_RMX2076
+PRODUCT_BRAND := Realme
+PRODUCT_MODEL := Realme X50 Pro
+PRODUCT_MANUFACTURER := Realme

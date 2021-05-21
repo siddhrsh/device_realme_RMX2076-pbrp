@@ -17,4 +17,6 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/omni_RMX2071CN.mk
+     $(LOCAL_DIR)/omni_RMX2076.mk
+
+COMMON_LUNCH_CHOICES := omni_RMX2076-eng

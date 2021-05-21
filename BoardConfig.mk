@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/realme/RMX2071CN
+DEVICE_PATH := device/realme/RMX2076
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -37,7 +37,7 @@ TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := RMX2071CN
+TARGET_OTA_ASSERT_DEVICE := RMX2076
 
 # File systems
 BOARD_HAS_LARGE_FILESYSTEM := true
