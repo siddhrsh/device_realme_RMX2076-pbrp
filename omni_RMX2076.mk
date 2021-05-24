@@ -15,7 +15,10 @@
 #
 
 # Release name
-PRODUCT_RELEASE_NAME := instantnoodle
+PRODUCT_RELEASE_NAME := RMX2076
+
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
@@ -23,19 +26,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
 
 # Inherit from hardware-specific part of the product configuration
-$(call inherit-product, device/oneplus/instantnoodle/device.mk)
+$(call inherit-product, device/realme/RMX2076/device.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := instantnoodle
-PRODUCT_NAME := omni_instantnoodle
-PRODUCT_BRAND := OnePlus
-PRODUCT_MODEL := IN2023
-PRODUCT_MANUFACTURER := OnePlus
+PRODUCT_DEVICE := RMX2076
+PRODUCT_NAME := omni_RMX2076
+PRODUCT_BRAND := Realme
+PRODUCT_MODEL := Realme X50 Pro
+PRODUCT_MANUFACTURER := Realme
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=OnePlus8 \
-    BUILD_PRODUCT=OnePlus8 \
-    TARGET_DEVICE=OnePlus8
+    PRODUCT_NAME=RMX2076 \
+    BUILD_PRODUCT=RMX2076 \
+    TARGET_DEVICE=RMX2076
 
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \

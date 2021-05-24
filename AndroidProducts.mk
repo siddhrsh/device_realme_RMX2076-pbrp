@@ -15,9 +15,6 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_instantnoodle.mk
+    $(LOCAL_DIR)/omni_RMX2076.mk
 
-COMMON_LUNCH_CHOICES := \
-    omni_instantnoodle-user \
-    omni_instantnoodle-userdebug \
-    omni_instantnoodle-eng
+COMMON_LUNCH_CHOICES := omni_RMX2076-eng

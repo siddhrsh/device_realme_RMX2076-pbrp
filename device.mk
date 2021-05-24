@@ -1,5 +1,5 @@
 
-LOCAL_PATH := device/oneplus/instantnoodle
+LOCAL_PATH := device/realme/RMX2076
 
 # define hardware platform
 PRODUCT_PLATFORM := kona
