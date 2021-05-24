@@ -14,10 +14,13 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/apollo
+DEVICE_PATH := device/realme/RMX2076
 
 # Release name
-PRODUCT_RELEASE_NAME := apollo
+PRODUCT_RELEASE_NAME := RMX2076
+
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 #Inherit from those products. Most specific first
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
@@ -26,9 +29,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 # Inherit from PitchBlack
 $(call inherit-product, vendor/pb/config/common.mk)
 
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root)
 
-# Dynamic Partition
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := RMX2076
+PRODUCT_NAME := omni_RMX2076
+PRODUCT_BRAND := Realme
+PRODUCT_MODEL := Realme X50 Pro
+PRODUCT_MANUFACTURER := Realme
 
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -39,11 +47,3 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     android.hardware.fastboot@1.0-impl-mock.recovery
 
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root)
-
-## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := apollo
-PRODUCT_NAME := omni_apollo
-PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi 10T
-PRODUCT_MANUFACTURER := Xiaomi
